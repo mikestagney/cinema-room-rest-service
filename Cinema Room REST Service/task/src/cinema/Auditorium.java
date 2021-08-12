@@ -10,9 +10,9 @@ public class Auditorium {
     List<MovieSeat> available_seats = new ArrayList<>();
 
     Auditorium() {
-        for (int row = 0; row < total_rows; row++) {
-            for (int col = 0; col < total_columns; col++) {
-                MovieSeat currentSeat = new MovieSeat(row + 1, col + 1);
+        for (int row = 1; row <= total_rows; row++) {
+            for (int col = 1; col <= total_columns; col++) {
+                MovieSeat currentSeat = new MovieSeat(row, col);
                 available_seats.add(currentSeat);
             }
         }
