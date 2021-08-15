@@ -1,13 +1,12 @@
 package cinema;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Auditorium {
 
     private final int total_rows = 9;
-    private final int total_columns = 9;
-    List<MovieSeat> available_seats = new ArrayList<>();
+    private final int total_columns = 9;  //  Collections.synchronizedList(new ArrayList<>());
+    Set<MovieSeat> available_seats = new LinkedHashSet<>();
 
     Auditorium() {
         for (int row = 1; row <= total_rows; row++) {
@@ -26,11 +25,36 @@ public class Auditorium {
         return total_columns;
     }
 
-    public List<MovieSeat> getAvailable_seats() {
+    public Set<MovieSeat> getAvailable_seats() {
         return available_seats;
     }
 
-    public void setAvailable_seats(List<MovieSeat> available_seats) {
+    public void setAvailable_seats(Set<MovieSeat> available_seats) {
         this.available_seats = available_seats;
+    }
+
+    public boolean isSeatPurchased(MovieSeat seat) {
+
+
+        //return !available_seats.contains(seat);
+
+        // return !available_seats.contains(seat);
+        for (MovieSeat currentSeat : available_seats) {
+            if (currentSeat.equals(seat)) {
+                return false;
+            }
+        }
+        return true;
+
+
+        /*
+        synchronized (available_seats) {
+            for (MovieSeat currentSeat : available_seats) {
+                if (Objects.equals(currentSeat, seat)) {
+                    return false;
+                }
+            }
+            return true;
+        }*/
     }
 }

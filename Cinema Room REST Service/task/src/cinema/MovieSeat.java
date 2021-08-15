@@ -1,12 +1,39 @@
 package cinema;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class MovieSeat {
     private int row;
     private int column;
+    private int price;
+    private boolean isPurchased;
+
+    @JsonIgnore
+    @JsonIgnoreProperties("isPurchased")
+    public boolean isPurchased() {
+        return isPurchased;
+    }
+
+    public void setPurchased(boolean purchased) {
+        isPurchased = purchased;
+    }
+
+
 
     MovieSeat(int row, int col) {
         this.row = row;
         this.column = col;
+        price = row <= 4 ? 10 : 8;
+        isPurchased = false;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getRow() {
@@ -24,5 +51,6 @@ public class MovieSeat {
     public void setColumn(int column) {
         this.column = column;
     }
+
 
 }
