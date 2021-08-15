@@ -35,9 +35,9 @@ public class CinemaController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The ticket has been already purchased!");
         }
 
+        auditorium.buySeat(seat);
 
-
-        return new MovieSeat(row, column);
+        return seat;
     }
 
 
