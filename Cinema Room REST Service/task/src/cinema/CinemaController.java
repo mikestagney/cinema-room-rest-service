@@ -25,7 +25,7 @@ public class CinemaController {
     @PostMapping("/purchase")
     public MovieSeat buyTicket(@RequestParam int row, @RequestParam int column) {
 
-        if (row < 0 || row > auditorium.getTotal_rows() || column < 0 || column > auditorium.getTotal_columns()) {
+        if (row < 1 || row > auditorium.getTotal_rows() || column < 1 || column > auditorium.getTotal_columns()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The number of a row or column is out of bounds!");
         }
 

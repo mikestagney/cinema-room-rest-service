@@ -7,10 +7,11 @@ public class Auditorium {
     private final int total_rows = 9;
     private final int total_columns = 9;  //  Collections.synchronizedList(new ArrayList<>());
     List<MovieSeat> available_seats;
-    private List<MovieSeat> allSeats = new ArrayList<>();
+    private List<MovieSeat> allSeats;
 
 
     Auditorium() {
+        allSeats = new ArrayList<>();
         for (int row = 1; row <= total_rows; row++) {
             for (int col = 1; col <= total_columns; col++) {
                 MovieSeat currentSeat = new MovieSeat(row, col);
