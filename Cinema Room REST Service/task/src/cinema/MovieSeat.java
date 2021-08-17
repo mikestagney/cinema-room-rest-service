@@ -7,6 +7,7 @@ public class MovieSeat {
     private int row;
     private int column;
     private int price;
+    /*
     private boolean isPurchased;
 
     @JsonIgnore
@@ -17,23 +18,28 @@ public class MovieSeat {
 
     public void setPurchased(boolean purchased) {
         isPurchased = purchased;
+    }*/
+
+    MovieSeat() {
+        setPrice(this.row);
     }
-
-
 
     MovieSeat(int row, int col) {
         this.row = row;
         this.column = col;
-        price = row <= 4 ? 10 : 8;
-        isPurchased = false;
+        setPrice(row);
+        //price = row <= 4 ? 10 : 8;
+       // isPurchased = false;
     }
 
     public int getPrice() {
+
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPrice(int row) {
+
+        this.price = row <= 4 ? 10 : 8;
     }
 
     public int getRow() {

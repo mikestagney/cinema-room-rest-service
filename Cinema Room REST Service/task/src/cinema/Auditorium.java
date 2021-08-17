@@ -7,17 +7,19 @@ public class Auditorium {
     private final int total_rows = 9;
     private final int total_columns = 9;  //  Collections.synchronizedList(new ArrayList<>());
     List<MovieSeat> available_seats;
-    private List<MovieSeat> allSeats;
-
+    //private List<MovieSeat> allSeats;
+    private boolean[][] seatPurchased;
 
     Auditorium() {
-        allSeats = new ArrayList<>();
-        for (int row = 1; row <= total_rows; row++) {
-            for (int col = 1; col <= total_columns; col++) {
-                MovieSeat currentSeat = new MovieSeat(row, col);
+        //allSeats = new ArrayList<>();
+        seatPurchased = new boolean[total_rows][total_columns];
+        for (boolean[] row : seatPurchased) {
+            Arrays.fill(row, false);
+                // MovieSeat currentSeat = new MovieSeat(row, col);
                 //available_seats.add(currentSeat);
-                allSeats.add(currentSeat);
-            }
+                //allSeats.add(currentSeat);
+
+
         }
     }
 
@@ -30,11 +32,15 @@ public class Auditorium {
     }
 
 
+
     public List<MovieSeat> getAvailable_seats() {
         available_seats = new ArrayList<>();
-        for (MovieSeat seat : allSeats) {
-            if (!seat.isPurchased()) {
-                available_seats.add(seat);
+        for (int row = 0; row < total_rows; row++) {
+            for (int column = 0; column < total_columns; column++) {
+                if (!seatPurchased[row][column]) {
+                    MovieSeat seat = new MovieSeat(row + 1, column + 1);
+                    available_seats.add(seat);
+                }
             }
          }
         return available_seats;
@@ -44,15 +50,19 @@ public class Auditorium {
         this.available_seats = available_seats;
     }
     public int getSeat(int row, int col) {
-        return col + ((row - 1) * 10) - row;
+        int temp = col + ((row - 1) * 10) - row;
+        System.out.println("index is " + temp);
+        return temp;
+
     }
 
 
     public boolean isSeatPurchased(MovieSeat seat) {
+        /*
         int index = getSeat(seat.getRow(), seat.getColumn());
-        MovieSeat currentSeat = available_seats.get(index);
+        MovieSeat currentSeat = allSeats.get(index);*/
 
-        return currentSeat.isPurchased();
+        return seatPurchased[seat.getRow() - 1][seat.getColumn() - 1];
         // return !available_seats.contains(seat);
                /*
         for (MovieSeat currentSeat : available_seats) {
@@ -76,10 +86,14 @@ public class Auditorium {
         }*/
     }
     public void buySeat(MovieSeat seat) {
-        int index = getSeat(seat.getRow(), seat.getColumn());
-        MovieSeat boughtSeat = available_seats.remove(index);
+        seatPurchased[seat.getRow() - 1][seat.getColumn() - 1] = true;
+
+        //int index = getSeat(seat.getRow(), seat.getColumn());
+        //allSeats.get(index).setPurchased(true);
+        /*
+        MovieSeat boughtSeat = allSeats.remove(index);
         boughtSeat.setPurchased(true);
-        available_seats.add(index, boughtSeat);
+        allSeats.add(index, boughtSeat);*/
 
     }
 
