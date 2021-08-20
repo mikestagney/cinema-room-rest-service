@@ -70,13 +70,13 @@ public class CinemaController {
         }
     }
     @ControllerAdvice
-    class SecurityControllerAdvice {
+    class CinemaControllerAdvice {
 
     @ExceptionHandler(ticketPurchaseError.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public PurchaseErrorResponse handlePurchaseException(ticketPurchaseError se) {
-        return new PurchaseErrorResponse(se.getMessage());
+    public PurchaseErrorResponse handlePurchaseException(ticketPurchaseError e) {
+        return new PurchaseErrorResponse(e.getMessage());
     }
 }
 
