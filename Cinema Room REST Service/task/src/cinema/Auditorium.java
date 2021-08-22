@@ -49,8 +49,10 @@ public class Auditorium {
     public boolean isSeatPurchased(MovieSeat seat) {
         return seatPurchased[seat.getRow() - 1][seat.getColumn() - 1];
     }
-    public void buySeat(MovieSeat seat) {
+    public TicketPurchase buySeat(MovieSeat seat) {
+        TicketPurchase purchase = new TicketPurchase(seat);
         seatPurchased[seat.getRow() - 1][seat.getColumn() - 1] = true;
+        return purchase;
     }
 
 }

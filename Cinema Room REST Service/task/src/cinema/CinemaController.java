@@ -18,7 +18,7 @@ public class CinemaController {
     }
 
     @PostMapping("/purchase")
-    public MovieSeat buyTicket(@RequestBody MovieSeat seat) {
+    public TicketPurchase buyTicket(@RequestBody MovieSeat seat) {
 
         if (seat.getRow() < 1 || seat.getRow() > auditorium.getTotal_rows() || seat.getColumn() < 1 || seat.getColumn() > auditorium.getTotal_columns()) {
             throw new ticketPurchaseError("The number of a row or a column is out of bounds!");
@@ -28,9 +28,9 @@ public class CinemaController {
             throw new ticketPurchaseError("The ticket has been already purchased!");
         }
 
-        auditorium.buySeat(seat);
+        TicketPurchase currentPurchase = auditorium.buySeat(seat);
 
-        return seat;
+        return currentPurchase;
     }
 }
     class ticketPurchaseError extends RuntimeException{
