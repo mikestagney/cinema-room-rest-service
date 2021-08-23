@@ -17,7 +17,7 @@ public class MovieSeat {
     }
 
     public int getPrice() {
-        return price;
+        return row <= 4 ? 10 : 8;
     }
 
     public void setPrice(int row) {

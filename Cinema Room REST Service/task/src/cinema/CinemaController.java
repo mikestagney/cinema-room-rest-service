@@ -41,7 +41,7 @@ public class CinemaController {
         if (password == null || !password.equals("super_secret")) {
             throw new ticketPurchaseError("The password is wrong!");
         }
-        return auditorium.currentStats();
+        return auditorium.getCurrentStats();
     }
 }
 

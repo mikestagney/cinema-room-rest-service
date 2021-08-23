@@ -1,5 +1,7 @@
 package cinema;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
 
 public class Auditorium {
@@ -68,7 +70,8 @@ public class Auditorium {
         ticketPurchases.remove(token.getToken());
         return new ReturnedTicket(returnedSeat);
     }
-    public Stats currentStats() {
+    @JsonIgnore
+    public Stats getCurrentStats() {
         int income = 0;
         int seatsAvailable = 0;
         int ticketsPurchased = 0;
