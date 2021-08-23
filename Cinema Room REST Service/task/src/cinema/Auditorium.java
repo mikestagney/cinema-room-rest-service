@@ -68,7 +68,25 @@ public class Auditorium {
         ticketPurchases.remove(token.getToken());
         return new ReturnedTicket(returnedSeat);
     }
+    public Stats currentStats() {
+        int income = 0;
+        int seatsAvailable = 0;
+        int ticketsPurchased = 0;
 
+        for (int row = 0; row < total_rows; row++) {
+            for (int col = 0; col < total_columns; col++) {
+                if (seatPurchased[row][col]) {
+                    ticketsPurchased++;
+                } else {
+                    seatsAvailable++;
+                }
+            }
+        }
+       for (var ticket : ticketPurchases.entrySet()) {
+           income += ticket.getValue().getPrice();
+       }
+       return new Stats(income, seatsAvailable, ticketsPurchased);
+    }
 
 
 }

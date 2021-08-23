@@ -16,6 +16,7 @@ public class CinemaController {
     public Auditorium getAvailableSeats() {
         return auditorium;
     }
+
     @PostMapping("/purchase")
     public Ticket buyTicket(@RequestBody MovieSeat seat) {
         if (seat.getRow() < 1 || seat.getRow() > auditorium.getTotal_rows() || seat.getColumn() < 1 || seat.getColumn() > auditorium.getTotal_columns()) {
@@ -26,12 +27,21 @@ public class CinemaController {
         }
         return auditorium.buySeat(seat);
     }
+
     @PostMapping("/return")
-     public ReturnedTicket returnTicket(@RequestBody Token token) {
+    public ReturnedTicket returnTicket(@RequestBody Token token) {
         if (!auditorium.isTokenValid(token)) {
             throw new ticketPurchaseError("Wrong token!");
         }
         return auditorium.returnTicket(token);
+    }
+
+    @PostMapping("/stats")
+    public Stats returnStats(@RequestParam String password) {
+        if (password == null || !password.equals("super_secret")) {
+            throw new ticketPurchaseError("The password is wrong!");
+        }
+        return auditorium.currentStats();
     }
 }
 
