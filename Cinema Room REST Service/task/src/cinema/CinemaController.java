@@ -1,6 +1,7 @@
 package cinema;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,10 +29,19 @@ public class CinemaController {
             throw new ticketPurchaseError("The ticket has been already purchased!");
         }
 
-        TicketPurchase currentPurchase = auditorium.buySeat(seat);
+        // TicketPurchase currentPurchase = auditorium.buySeat(seat);
 
-        return currentPurchase;
+        return auditorium.buySeat(seat);
     }
+
+    @PostMapping("/return")
+     public ReturnedTicket returnTicket(@RequestBody Token token) {
+        if (!auditorium.isTokenValid(token)) {
+            throw new ticketPurchaseError("Wrong token!");
+        }
+        return auditorium.returnTicket(token);
+    }
+
 }
     class ticketPurchaseError extends RuntimeException{
         private String message;

@@ -8,12 +8,15 @@ public class Auditorium {
     private final int total_columns = 9;
     List<MovieSeat> available_seats;
     private boolean[][] seatPurchased;
+    Map<UUID, MovieSeat> ticketPurchases;
+
 
     Auditorium() {
         seatPurchased = new boolean[total_rows][total_columns];
         for (boolean[] row : seatPurchased) {
             Arrays.fill(row, false);
         }
+        ticketPurchases = new HashMap<>();
     }
 
     public int getTotal_rows() {
@@ -49,10 +52,23 @@ public class Auditorium {
     public boolean isSeatPurchased(MovieSeat seat) {
         return seatPurchased[seat.getRow() - 1][seat.getColumn() - 1];
     }
+
     public TicketPurchase buySeat(MovieSeat seat) {
         TicketPurchase purchase = new TicketPurchase(seat);
         seatPurchased[seat.getRow() - 1][seat.getColumn() - 1] = true;
+        ticketPurchases.put(purchase.getToken(), seat);
         return purchase;
     }
+    public boolean isTokenValid(Token token) {
+        return ticketPurchases.containsKey(token.getToken());
+    }
+    public ReturnedTicket returnTicket(Token token) {
+        MovieSeat returnedSeat = ticketPurchases.get(token.getToken());
+        seatPurchased[returnedSeat.getRow() - 1][returnedSeat.getColumn() - 1] = false;
+        ticketPurchases.remove(token.getToken());
+        return new ReturnedTicket(returnedSeat);
+    }
+
+
 
 }
