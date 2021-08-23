@@ -53,8 +53,8 @@ public class Auditorium {
         return seatPurchased[seat.getRow() - 1][seat.getColumn() - 1];
     }
 
-    public TicketPurchase buySeat(MovieSeat seat) {
-        TicketPurchase purchase = new TicketPurchase(seat);
+    public Ticket buySeat(MovieSeat seat) {
+        Ticket purchase = new Ticket(seat);
         seatPurchased[seat.getRow() - 1][seat.getColumn() - 1] = true;
         ticketPurchases.put(purchase.getToken(), seat);
         return purchase;

@@ -3,12 +3,12 @@ package cinema;
 import java.util.UUID;
 
 
-public class TicketPurchase {
+public class Ticket {
 
     UUID token;
     MovieSeat ticket;
 
-    TicketPurchase(MovieSeat seat) {
+    Ticket(MovieSeat seat) {
         token = UUID.randomUUID();
         ticket = seat;
     }
