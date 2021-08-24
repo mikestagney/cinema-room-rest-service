@@ -11,6 +11,7 @@ public class Auditorium {
     List<MovieSeat> available_seats;
     private boolean[][] seatPurchased;
     Map<UUID, MovieSeat> ticketPurchases;
+    String password = "super_secret";
 
 
     Auditorium() {
@@ -72,24 +73,14 @@ public class Auditorium {
     }
     @JsonIgnore
     public Stats getCurrentStats() {
-        int income = 0;
-        int seatsAvailable = 0;
-        int ticketsPurchased = 0;
+       int ticketsPurchased = ticketPurchases.size();
+       int seatsAvailable = total_rows * total_columns - ticketsPurchased;
+       int income = 0;
 
-        for (int row = 0; row < total_rows; row++) {
-            for (int col = 0; col < total_columns; col++) {
-                if (seatPurchased[row][col]) {
-                    ticketsPurchased++;
-                } else {
-                    seatsAvailable++;
-                }
-            }
-        }
        for (var ticket : ticketPurchases.entrySet()) {
            income += ticket.getValue().getPrice();
        }
        return new Stats(income, seatsAvailable, ticketsPurchased);
     }
-
 
 }

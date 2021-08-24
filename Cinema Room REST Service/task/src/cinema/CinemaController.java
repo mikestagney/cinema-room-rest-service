@@ -1,7 +1,11 @@
 package cinema;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class CinemaController {
@@ -20,38 +24,38 @@ public class CinemaController {
     @PostMapping("/purchase")
     public Ticket buyTicket(@RequestBody MovieSeat seat) {
         if (seat.getRow() < 1 || seat.getRow() > auditorium.getTotal_rows() || seat.getColumn() < 1 || seat.getColumn() > auditorium.getTotal_columns()) {
-            throw new ticketPurchaseError("The number of a row or a column is out of bounds!");
+            throw new TicketPurchaseError("The number of a row or a column is out of bounds!");
         }
         if (auditorium.isSeatPurchased(seat)) {
-            throw new ticketPurchaseError("The ticket has been already purchased!");
+            throw new TicketPurchaseError("The ticket has been already purchased!");
         }
         return auditorium.buySeat(seat);
     }
 
     @PostMapping("/return")
-    public ReturnedTicket returnTicket(@RequestBody Token token) {
+    public ReturnedTicket returnTicket(@RequestBody Token token) throws AuthorizationError {
         if (!auditorium.isTokenValid(token)) {
-            throw new ticketPurchaseError("Wrong token!");
+            throw new TicketPurchaseError("Wrong token!");
         }
         return auditorium.returnTicket(token);
     }
 
     @PostMapping("/stats")
-    public Stats returnStats(@RequestParam String password) {
-        if (password == null || !password.equals("super_secret")) {
-            throw new ticketPurchaseError("The password is wrong!");
+    public Stats returnStats(@RequestParam(required = false) String password) {
+        if (password == null || !password.equals(auditorium.password)) {
+            throw new AuthorizationError("The password is wrong!");
         }
         return auditorium.getCurrentStats();
     }
 }
 
-    class ticketPurchaseError extends RuntimeException{
+    class TicketPurchaseError extends RuntimeException {
         private String message;
 
-        public ticketPurchaseError() {
+        public TicketPurchaseError() {
         }
 
-        public ticketPurchaseError(String message) {
+        public TicketPurchaseError(String message) {
             this.message = message;
         }
 
@@ -63,13 +67,29 @@ public class CinemaController {
             this.message = message;
         }
     }
-    class PurchaseErrorResponse {
+    class AuthorizationError extends RuntimeException {
+        private String message;
+
+        public AuthorizationError() {
+        }
+        public AuthorizationError(String message) {
+            this.message = message;
+        }
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+    }
+    class ErrorResponse {
 
         private String error;
 
-        public PurchaseErrorResponse() {
+        public ErrorResponse() {
         }
-        public PurchaseErrorResponse(String error) {
+        public ErrorResponse(String error) {
             this.error = error;
         }
 
@@ -84,12 +104,22 @@ public class CinemaController {
     @ControllerAdvice
     class CinemaControllerAdvice {
 
-    @ExceptionHandler(ticketPurchaseError.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public PurchaseErrorResponse handlePurchaseException(ticketPurchaseError e) {
-        return new PurchaseErrorResponse(e.getMessage());
-    }
-}
+        @ExceptionHandler(TicketPurchaseError.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public ErrorResponse handlePurchaseException(TicketPurchaseError e) {
+            return new ErrorResponse(e.getMessage());
+        }
 
+        @ExceptionHandler(AuthorizationError.class)
+        @ResponseStatus(HttpStatus.UNAUTHORIZED)
+        @ResponseBody
+        public ResponseEntity<?> handleWrongLogin(AuthorizationError e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(errorResponse);
+        }
+}
 
