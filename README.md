@@ -17,12 +17,12 @@ The movie theater has 81 seats, divided into 9 rows and 9 columns. Ticket prices
 
 * Main.java - sets up Spring Boot application framework 
 * CinemaController.java - REST controller that receives and sends HTTP requests
-* Auditorium.java - class with the fields and methods for the business model for the movie theater
-* MovieSeat.java - class with the row, column and price of the individual seat
-* Ticket.java - class that holds a ticket purchase object, which contains a MovieSeat object along with a random UUID number as a token
-* Token.java - object for ticket return requests, allow Spring Boot to deserialize the JSON 
-* ReturnedTicket.java - object to create JSON for ticket return responses
-* Stats.java - class that holds sales information: the total income and number of seats available and seats sold
+* Auditorium.java - class with the fields and methods for the business model to manage the movie theater
+* MovieSeat.java - object with the row, column and price of the individual seat
+* Ticket.java - object which contains a MovieSeat object along with a random UUID number as a token
+* Token.java - object for ticket return requests, allowing Spring Boot to deserialize the JSON for ticket returns
+* ReturnedTicket.java - object to serialize to a JSON for ticket return responses
+* Stats.java - object that holds the total income and number of seats available and seats sold
 
 Eighteenth project created for JetBrains Academy Java Developer course - hard level project.
 
