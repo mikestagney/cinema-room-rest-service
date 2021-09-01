@@ -1,5 +1,5 @@
 # Cinema Room Rest Service
-REST controller with Java and Spring Boot to manage ticket sales for a movie theater.  Handles HTTP requests for available seats and allows users to purchase and return tickets. With the correct password, sales statistics are returned.
+REST controller with Java and Spring Boot to manage ticket sales for a movie theater.  Handles HTTP requests for available seats and allows users to purchase and return tickets. With the correct password, sales statistics are returned. All output is HTTP responses.
 
 ## Things learned 
 
@@ -15,8 +15,8 @@ The movie theater has 81 seats, divided into 9 rows and 9 columns. Ticket prices
 
 #### The cinema directory contains 8 files: 
 
-* Main.java - sets up Spring Boot application framework 
-* CinemaController.java - REST controller that receives and sends HTTP requests
+* Main.java - lauches the Spring Boot application 
+* CinemaController.java - REST controller that receives and sends HTTP messages
 * Auditorium.java - class with the fields and methods for the business model to manage the movie theater
 * MovieSeat.java - object with the row, column and price of the individual seat
 * Ticket.java - object which contains a MovieSeat object along with a random UUID number as a token
@@ -30,4 +30,4 @@ Eighteenth project created for JetBrains Academy Java Developer course - hard le
 
 ### Sample input and output:
 
-All input and output are HTTP requests (screen shots to come)
+All input and output is with HTTP requests and responses (screen shots to come)
