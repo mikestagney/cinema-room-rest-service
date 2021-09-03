@@ -28,6 +28,14 @@ Eighteenth project created for JetBrains Academy Java Developer course - hard le
 
 ### How to Run
 
+To get a JSON of all the available seats, send a GET request to the /seats endpoint.
+
+To purchase a ticket, send a POST request to the /purchase endpoint with a JSON in the response body containing row and number.
+
+To refund a purchased ticket, send a POST request to the /return endpoint with the token in the response body in JSON format.
+
+To get sales information, send a POST request to the /stats endpoint with the password in the query parameters.
+
 ### Sample input and output:
 
 All input and output is with HTTP requests and responses (screen shots to come)
