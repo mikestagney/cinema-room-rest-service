@@ -1,3 +1,4 @@
+
 # Cinema Room Rest Service
 REST controller with Java and Spring Boot to manage ticket sales for a movie theater.  Handles HTTP requests for available seats and allows users to purchase and return tickets. With the correct password, sales statistics are returned. All output is HTTP responses.
 
@@ -36,6 +37,12 @@ To refund a purchased ticket, send a POST request to the /return endpoint with t
 
 To get sales information, send a POST request to the /stats endpoint with the password in the query parameters.
 
-### Sample input and output:
+## Sample input and output: All input and output is with HTTP requests and responses
 
-All input and output is with HTTP requests and responses (screen shots to come)
+Get a listing of all available seats
+
+<img width="1108" alt="Get seats - all seats available" src="https://user-images.githubusercontent.com/49824414/132113927-70a5df16-2fec-44a2-9432-76b0639c184d.png">
+
+Purchase a ticket
+
+<img width="1131" alt="Purchase ticket - successful" src="https://user-images.githubusercontent.com/49824414/132114007-1bfcce4d-28b9-4636-a066-78239145f14c.png">
