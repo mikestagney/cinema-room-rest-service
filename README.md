@@ -16,16 +16,16 @@ The movie theater has 81 seats, divided into 9 rows and 9 columns. Ticket prices
 
 #### The cinema directory contains 8 files: 
 
-* Main.java - lauches the Spring Boot application 
+* Main.java - launches the Spring Boot application 
 * CinemaController.java - REST controller that receives and sends HTTP messages
-* Auditorium.java - class with the fields and methods for the business model to manage the movie theater
+* Auditorium.java - business model with the fields and methods to manage movie theater ticket sales
 * MovieSeat.java - object with the row, column and price of the individual seat
 * Ticket.java - object which contains a MovieSeat object along with a random UUID number as a token
 * Token.java - object for ticket return requests, allowing Spring Boot to deserialize the JSON for ticket returns
-* ReturnedTicket.java - object to serialize to a JSON for ticket return responses
-* Stats.java - object that holds the total income and number of seats available and seats sold
+* ReturnedTicket.java - object serialized as a JSON for ticket return responses
+* Stats.java - object that holds the total income and number of seats available and seats sold, serialized and returned as JSON
 
-Eighteenth project created for JetBrains Academy Java Developer course - hard level project.
+Eighteenth project created for JetBrains Academy Java Backend Developer course - hard level project.
 
 ### How to Run
 
@@ -67,7 +67,7 @@ Return a ticket with the correct token
 
 <img width="1128" alt="Return ticket - correct token" src="https://user-images.githubusercontent.com/49824414/132258365-a2d27bdd-8890-4637-8773-e7d58d796f81.png">
 
-Try to get statistics with an incorrrect password
+Try to get statistics with an incorrect password
 
 <img width="1129" alt="Stats request - wrong password" src="https://user-images.githubusercontent.com/49824414/132258958-cad44c7e-171e-4bab-847b-8c1850f3f66d.png">
 
