@@ -37,7 +37,7 @@ To refund a purchased ticket, send a POST request to the /return endpoint with t
 
 To get sales information, send a POST request to the /stats endpoint with the password in the query parameters.
 
-## Sample input and output: All input and output is with HTTP requests and responses
+## Sample input and output: All HTTP requests and responses
 
 Get a listing of all available seats
 
@@ -46,3 +46,32 @@ Get a listing of all available seats
 Purchase a ticket
 
 <img width="1131" alt="Purchase ticket - successful" src="https://user-images.githubusercontent.com/49824414/132114007-1bfcce4d-28b9-4636-a066-78239145f14c.png">
+
+Get the listing of seats with one seat sold
+
+<img width="1145" alt="Get seats - one seat sold" src="https://user-images.githubusercontent.com/49824414/132257951-af72a2eb-38fb-4079-be9c-15822db9ae2a.png">
+
+Try to purchase seat that is already sold 
+
+<img width="1130" alt="Purchase ticket - already bought" src="https://user-images.githubusercontent.com/49824414/132258168-ca4ec739-bf4f-4e89-a4a9-b803995dc2c3.png">
+
+Try to purchase a seat that doesn't exist - only 9 seats in a row, not 15
+
+<img width="1122" alt="Purchase ticket - column out of bounds" src="https://user-images.githubusercontent.com/49824414/132258254-cf364b81-1046-445a-b709-3fe8d3c2c64b.png">
+
+Try to return ticket with a wrong token
+
+<img width="1146" alt="Return ticket - wrong token" src="https://user-images.githubusercontent.com/49824414/132258327-b2225020-a66d-48f3-a3a1-ce0a8aa25097.png">
+
+Return a ticket with the correct token
+
+<img width="1128" alt="Return ticket - correct token" src="https://user-images.githubusercontent.com/49824414/132258365-a2d27bdd-8890-4637-8773-e7d58d796f81.png">
+
+Try to get statistics with an incorrrect password
+
+<img width="1129" alt="Stats request - wrong password" src="https://user-images.githubusercontent.com/49824414/132258958-cad44c7e-171e-4bab-847b-8c1850f3f66d.png">
+
+Get statistics with the correct password
+
+<img width="1151" alt="Stats request - correct password" src="https://user-images.githubusercontent.com/49824414/132258982-10b84e81-100c-4c90-9225-13c2b97b3364.png">
+
